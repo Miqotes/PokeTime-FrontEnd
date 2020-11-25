@@ -2,11 +2,13 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import Header from './Header'
 import SignInForm from './SignInForm';
-import LoginForm from './LoginForm'
+import LoginForm from './LoginForm';
+import PokemonList from './PokemonList';
 
 function App() {
   const [user, setUser] = useState({})
   const [form, setForm] = useState("")
+  const [pokemonData, setPokemonData] = useState([])
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -18,7 +20,7 @@ function App() {
       })
       .then(resp => resp.json())
       .then(data => {
-        setUser(data)
+        handleLogin(data)
         // console.log(data)
       })
     }
@@ -26,6 +28,8 @@ function App() {
 
   const handleLogin = (user) => {
     setUser(user)
+    fetchPokemon()
+    handleFormSwitch("listPokemon")
   }
 
   const handleFormSwitch = (input) => {
@@ -43,10 +47,24 @@ function App() {
     .then(data => console.log(data))
   }
 
+  const fetchPokemon = () => {
+    const token = localStorage.getItem("token")
+    fetch(`http://localhost:3000/pokemon`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    })
+    .then(resp => resp.json())
+    .then(data => setPokemonData(data))
+  }
+
   console.log(user)
 
   const renderForm = () => {
     switch(form){
+      case "listPokemon":
+        return <PokemonList pokemon={pokemonData} />
+        break;
       case "login":
         return <LoginForm handleLogin={handleLogin}/>
         break;
