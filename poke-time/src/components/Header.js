@@ -10,6 +10,7 @@ function Header(props){
         <div style={headerStyle}>
             <h1 style={{color: "white"}}>Poke-Time</h1>
             <button className="ui button" onClick={() => props.handleFormSwitch("signUp")}>Sign Up</button>
+            <div class="divider"/>
             <button className="ui button" onClick={() => props.handleFormSwitch("login")}>Log In</button>
         </div>
     )

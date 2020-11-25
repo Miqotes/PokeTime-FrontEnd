@@ -1,3 +1,5 @@
+import React from 'react';
+import PokemonList from './PokemonList';
 function Profile() {
     return (
       <div>

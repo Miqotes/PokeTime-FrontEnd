@@ -78,7 +78,7 @@ function App() {
         {
           renderForm()
         }
-        <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button>
+        {/* <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button> */}
     </div>
   );
 }

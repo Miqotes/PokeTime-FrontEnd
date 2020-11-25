@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+  color: rgb(243, 208, 8);
+  background-color: #292D3E;
+  border: 1px solid rgb(199, 206, 211);
+  border-radius: 4px;
+  padding: 0 15px;
+  cursor: pointer;
+  height:32px;
+  font-size:14px;
+  transition: all 0.2s ease-in-out;
+  
+  }
+  button:hover {
+  box-shadow: 1px 1px #3e3f41, 2px 2px #be2222, 3px 3px #be2222;
+  transform: translateX(-3px);
+  }
+
+  .divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
