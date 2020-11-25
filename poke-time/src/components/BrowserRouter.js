@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+
 
 ReactDOM.render((
     <Router>
@@ -9,6 +9,7 @@ ReactDOM.render((
             <Route exact path="/profile" component={ProfileContainer} />
             <Route exact path="/friends" component={FriendsContainer} />
             <Route exact path="/SignOut" component={SignOut} />
+            
         </div>
     </Router>),
     document.getElementById('root')

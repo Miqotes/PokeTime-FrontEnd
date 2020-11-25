@@ -1,4 +1,4 @@
-function Signout() {
+export default function Signout() {
     return (
       <div>
         <h2>Sign Out</h2>

@@ -9,7 +9,7 @@ export default function PokemonList({pokemon}) {
         return (
             <li key={index}>
                 <span>
-                    <a href={pokemon.url}>{pokemon.name}</a>
+                    <a href={pokemon.url}>{pokemon.name}{pokemon.sprites}</a>
                 </span>
             </li>
         )

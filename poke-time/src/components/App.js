@@ -1,13 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
 import Header from './Header'
+import Home from './Home';
 import SignInForm from './SignInForm';
 import LoginForm from './LoginForm';
+import Profile from './Profile';
+import FriendsContainer from './FriendsContainer';
+import SignOut from './SignOut';
 import PokemonList from './PokemonList';
 
+
 function App() {
-  const [user, setUser] = useState({})
-  const [form, setForm] = useState("")
+  const history = useHistory();
+  const [user, setUser] = useState(null)
   const [pokemonData, setPokemonData] = useState([])
 
   useEffect(() => {
@@ -29,11 +35,8 @@ function App() {
   const handleLogin = (user) => {
     setUser(user)
     fetchPokemon()
-    handleFormSwitch("listPokemon")
-  }
+    history.push("/profile");
 
-  const handleFormSwitch = (input) => {
-    setForm(input)
   }
 
   const handleAuthClick = () => {
@@ -58,27 +61,41 @@ function App() {
     .then(data => setPokemonData(data))
   }
 
-  console.log(user)
-
-  const renderForm = () => {
-    switch(form){
-      case "listPokemon":
-        return <PokemonList pokemon={pokemonData} />
-        break;
-      case "login":
-        return <LoginForm handleLogin={handleLogin}/>
-        break;
-      default:
-        return <SignInForm handleLogin={handleLogin}/>
-    }
+  const LoginContainer = () => {
+    return <LoginForm handleLogin={handleLogin}/>
   }
+
+  const SignupContainer = () => {
+    return <SignInForm handleLogin={handleLogin}/>
+  }
+
+  const ProfileContainer = () => {
+    return <Profile pokemon={pokemonData} />
+  }
+
   return (
     <div className="App">
-        <Header handleFormSwitch={handleFormSwitch}/>
-        {
-          renderForm()
-        }
-        {/* <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button> */}
+      {user ? (
+        <React.Fragment>
+          <Header user={user} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/profile" component={ProfileContainer} />
+            <Route path="/friends" component={FriendsContainer} />
+            <Route path="/SignOut" component={SignOut} />
+          </Switch>
+        </React.Fragment>
+      ) : (
+        <>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={LoginContainer} />
+            <Route path="/signup" component={SignupContainer} />
+          </Switch>
+        </>
+      )}
+      {/* <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button> */}
     </div>
   );
 }

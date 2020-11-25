@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import NavBar from "./NavBar"
 
 const headerStyle = {
     background: "black",
@@ -6,12 +8,25 @@ const headerStyle = {
     // lineHeight: "15vh"
 }
 function Header(props){
+    const {user} = props;
     return(
         <div style={headerStyle}>
             <h1 style={{color: "white"}}>Poke-Time</h1>
-            <button className="ui button" onClick={() => props.handleFormSwitch("signUp")}>Sign Up</button>
-            <div class="divider"/>
-            <button className="ui button" onClick={() => props.handleFormSwitch("login")}>Log In</button>
+            {user ? (
+                <>
+                    <NavBar />
+                </>
+            ) : (
+                <span>
+                    <Link to={'/signup'}>
+                        <button className="ui button">Sign Up</button>
+                    </Link>
+                    <div class="divider"/>
+                    <Link to={'/login'}>
+                        <button className="ui button">Log In</button>
+                    </Link>
+                </span>
+            )}
         </div>
     )
 }
