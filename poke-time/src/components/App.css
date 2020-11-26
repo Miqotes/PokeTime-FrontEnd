@@ -66,3 +66,7 @@ button {
   color: white;
   height: 70px;
 }
+
+ul{
+  list-style-type: none;
+}

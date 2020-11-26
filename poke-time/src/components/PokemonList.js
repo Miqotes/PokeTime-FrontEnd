@@ -2,6 +2,7 @@ import React from 'react';
 
 export default function PokemonList({pokemon}) {
     if (!pokemon) return null; // do nothing if we're given nothing
+    console.log(pokemon)
 
 
     // Shadowing the above pokemon (plural) with pokemon (singular)
@@ -9,7 +10,8 @@ export default function PokemonList({pokemon}) {
         return (
             <li key={index}>
                 <span>
-                    <a href={pokemon.url}>{pokemon.name}{pokemon.sprites}</a>
+                    <a href={pokemon.url}>{pokemon.name}</a>
+                    <img src={pokemon.sprite}></img>
                 </span>
             </li>
         )
