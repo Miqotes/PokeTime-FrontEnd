@@ -70,3 +70,19 @@ button {
 ul{
   list-style-type: none;
 }
+
+.tiles{
+  /* display: inline-block; */
+  /* width:calc((750px / 3)); */
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fit, 210px);
+  
+}
+
+.profileBox{
+  float:left;
+  margin: 10px 0px;
+  padding: 20px;
+  border: 2px dashed grey;
+}

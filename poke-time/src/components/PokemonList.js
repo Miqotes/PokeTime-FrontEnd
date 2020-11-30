@@ -1,15 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
+
+import SearchBar from './SearchBar';
 
 export default function PokemonList({pokemon}) {
-    if (!pokemon) return null; // do nothing if we're given nothing
-    console.log(pokemon)
+    const [visiblePokemon, setVisiblePokemon] = useState(pokemon);
+
+    const handleSearchUpdate = (term) => {
+        setVisiblePokemon(pokemon.filter(
+            p => p.name.toLowerCase().includes(term)
+        ))
+    }
 
 
     // Shadowing the above pokemon (plural) with pokemon (singular)
     const renderSinglePokemon = (pokemon, index) => {
         return (
-            <li key={index}>
-                <span>
+            <li className="ui right aligned container yellow segment cards" key={index}>
+                <span className="">
                     <a href={pokemon.url}>{pokemon.name}</a>
                     <img src={pokemon.sprite}></img>
                 </span>
@@ -18,9 +25,10 @@ export default function PokemonList({pokemon}) {
     };
 
     return (
-        <div>
-            <ul>
-                {pokemon.map(renderSinglePokemon)}
+        <div className="">
+            <SearchBar onChange={handleSearchUpdate} />
+            <ul className="tiles ">
+                {visiblePokemon.map(renderSinglePokemon)}
             </ul>
         </div>
     )

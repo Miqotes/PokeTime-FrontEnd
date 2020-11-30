@@ -9,12 +9,12 @@ import Profile from './Profile';
 import FriendsContainer from './FriendsContainer';
 import SignOut from './SignOut';
 import PokemonList from './PokemonList';
-
+// import 'bulma/css/bulma.css'
 
 function App() {
   const history = useHistory();
   const [user, setUser] = useState(null)
-  const [pokemonData, setPokemonData] = useState([])
+  const [pokemonData, setPokemonData] = useState(null)
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -70,7 +70,10 @@ function App() {
   }
 
   const ProfileContainer = () => {
-    return <Profile pokemon={pokemonData} />
+    if (!user) return null;
+    if (!pokemonData) return null;
+
+    return <Profile pokemon={pokemonData} user={user} />
   }
 
   return (
