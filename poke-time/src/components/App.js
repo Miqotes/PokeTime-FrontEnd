@@ -7,7 +7,7 @@ import SignInForm from './SignInForm';
 import LoginForm from './LoginForm';
 import Profile from './Profile';
 import FriendsContainer from './FriendsContainer';
-import SignOut from './SignOut';
+
 import PokemonList from './PokemonList';
 // import 'bulma/css/bulma.css'
 
@@ -76,16 +76,20 @@ function App() {
     return <Profile pokemon={pokemonData} user={user} />
   }
 
+  const clearUser = () => {
+    setUser(null)
+  }
+
   return (
     <div className="App">
       {user ? (
         <React.Fragment>
-          <Header user={user} />
+          <Header user={user} clearUser={clearUser} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/profile" component={ProfileContainer} />
             <Route path="/friends" component={FriendsContainer} />
-            <Route path="/SignOut" component={SignOut} />
+            
           </Switch>
         </React.Fragment>
       ) : (

@@ -8,13 +8,13 @@ const headerStyle = {
     // lineHeight: "15vh"
 }
 function Header(props){
-    const {user} = props;
+    const {user, clearUser} = props;
     return(
         <div style={headerStyle}>
             <h1 style={{color: "white"}}>Poke-Time</h1>
             {user ? (
                 <>
-                    <NavBar />
+                    <NavBar clearUser={clearUser} />
                 </>
             ) : (
                 <span>
