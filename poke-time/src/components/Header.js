@@ -19,11 +19,11 @@ function Header(props){
             ) : (
                 <span>
                     <Link to={'/signup'}>
-                        <button className="ui button">Sign Up</button>
+                        <button className="">Sign Up</button>
                     </Link>
                     <div class="divider"/>
                     <Link to={'/login'}>
-                        <button className="ui button">Log In</button>
+                        <button className="">Log In</button>
                     </Link>
                 </span>
             )}

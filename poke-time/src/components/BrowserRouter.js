@@ -1,6 +1,7 @@
 import React from "react";
 
 
+
 ReactDOM.render((
     <Router>
         <div>
@@ -9,26 +10,8 @@ ReactDOM.render((
             <Route exact path="/profile" component={ProfileContainer} />
             <Route exact path="/friends" component={FriendsContainer} />
             <Route exact path="/SignOut" component={SignOut} />
-            
+            <Route exact path="/TeamLists" component={TeamProfile} />
         </div>
     </Router>),
     document.getElementById('root')
 )
-
-// export default function PokeRoutes() {
-//     return (
-//         <Router>
-//             <div>
-//                 <span>
-//                     <link to="/">Home</link>
-//                     <break />
-//                     <link to="/about">About</link>
-//                     <break />
-//                     <link to="/profile">Profile</link>
-//                     <break />
-//                     <link to="/friends">Friends</link>
-//                 </span>
-//             </div>
-//         </Router>
-//     )
-// }

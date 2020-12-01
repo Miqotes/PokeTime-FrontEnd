@@ -77,12 +77,33 @@ ul{
   display: grid;
   grid-gap: 15px;
   grid-template-columns: repeat(auto-fit, 210px);
+  overflow-y: scroll;
+  max-height:300px;
+  
   
 }
 
 .profileBox{
-  float:left;
+  /* float:left;
   margin: 10px 0px;
   padding: 20px;
-  border: 2px dashed grey;
+  border: 2px dashed grey; */
+  float: left; 
+  width: 5%; 
+  text-align: left;
+}
+
+  .verticalBox { 
+  border-left: 6px solid black; 
+  /* height: 300px;  */
+  position:absolute; 
+  left: 50%; 
+  width: 25%;
+} 
+
+.lowerForm{
+  float: left;
+  display: block;
+  width: 10em;
+  margin-right: 1em;
 }

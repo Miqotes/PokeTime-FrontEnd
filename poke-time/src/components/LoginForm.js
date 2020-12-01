@@ -52,7 +52,7 @@ function LoginForm(props){
                     <input value={password} onChange={handlePasswordChange} type="password" placeholder="password"/>
                 </div>
                 
-                <button class="ui button" type="submit">Submit</button>
+                <button class="" type="submit">Submit</button>
             </form>
         </div>
         </div>

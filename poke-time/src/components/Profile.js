@@ -8,14 +8,9 @@ export default function Profile(props) {
     return (
         <>
             <div className="left aligned column">
-            <span className="ui vertical stripe segment">
+            {/* <span className="ui vertical stripe segment verticalBox"> */}
             <UserBioComponent user={props.user} />
-            </span> 
-            </div>
-            
-            <div className="ui left container segment">
-                {/* <SideBar user={props.user} /> */}
-                <PokemonList pokemon={props.pokemon} />
+            {/* </span>  */}
             </div>
         </>
     )

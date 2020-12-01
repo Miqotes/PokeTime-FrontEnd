@@ -52,7 +52,7 @@ function SignInForm(props) {
                     <input value={password} onChange={handlePasswordChange} type="password" placeholder="password"/>
                 </div>
                 
-                <button className="ui button" type="submit">Submit</button>
+                <button className="" type="submit">Submit</button>
             </form>
         </div>
     )

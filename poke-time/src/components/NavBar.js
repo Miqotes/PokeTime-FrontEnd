@@ -10,18 +10,23 @@ export default function Navbar(props) {
     return (
       <span>
         <Link to="/">
-          <button className="ui button">Home</button>
-        </Link>
-        <div class="divider"/>
-        <Link to="/friends">
-          <button className="ui button">Friends</button>
+          <button className="">Home</button>
         </Link>
         <div class="divider"/>
         <Link to="/profile">
-          <button className="ui button">Profile</button>
+          <button className="">Profile</button>
         </Link>
-        <Link to="/">
-          <button className="ui button" onClick={handleSignOut}>Sign Out</button>
+        <div class="divider"/>
+        <Link to="team_lists">
+          <button className="">Teams</button>
+        </Link>
+        <div class="divider"/>
+        <Link to="/friends">
+          <button className="">Friends</button>
+        </Link>
+        <div class="divider"/>
+        <Link to="/login">
+          <button className="" onClick={handleSignOut}>Sign Out</button>
         </Link>
       </span>
     );
