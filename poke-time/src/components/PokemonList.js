@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 import SearchBar from './SearchBar';
+import Pokemon from './Pokemon';
 
 export default function PokemonList({pokemon}) {
     const [visiblePokemon, setVisiblePokemon] = useState(pokemon);
@@ -15,11 +16,8 @@ export default function PokemonList({pokemon}) {
     // Shadowing the above pokemon (plural) with pokemon (singular)
     const renderSinglePokemon = (pokemon, index) => {
         return (
-            <li className="ui right aligned container yellow segment cards" key={index}>
-                <span className="">
-                    <a href={pokemon.url}>{pokemon.name}</a>
-                    <img src={pokemon.sprite}></img>
-                </span>
+            <li key={index}>
+                <Pokemon pokemon={pokemon} />
             </li>
         )
     };

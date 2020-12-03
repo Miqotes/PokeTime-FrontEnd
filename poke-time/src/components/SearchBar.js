@@ -10,9 +10,10 @@ export default function SearchBar(props){
         onChange(event.target.value.toLowerCase())
     };
     return (
-        <div>
-            <input type="text" placeholder="Search"  
-            value={searchTerm}  onChange={handleChange}/>
+        <div className="ui category search icon input">
+            <input className="prompt " type="text" placeholder="Pokèmon"  
+            value={searchTerm}  onChange={handleChange}></input>
+            <i className="search icon"></i>
         </div>
     )
 }

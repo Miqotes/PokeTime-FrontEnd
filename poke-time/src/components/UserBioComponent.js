@@ -27,9 +27,9 @@ export default function UserBioComponent(props) {
 
     return (
         <form >
-            <div className="ui column container ui red segment">
+            <div className="ui red segment left floated  centered card">
                 <span className="field profileBox">{user.username}</span>
-                <textarea className="" type="text" rows="3" value={bio} onChange={handleBioChange}  />
+                <textarea className="lowerForm" type="text" rows="4" value={bio} onChange={handleBioChange}  />
                 <button type="submit" onClick={updateBio}>submit</button>
             </div>
         </form>

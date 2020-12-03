@@ -7,7 +7,7 @@ import SignInForm from './SignInForm';
 import LoginForm from './LoginForm';
 import Profile from './Profile';
 import FriendsContainer from './FriendsContainer';
-import TeamProfile from "./TeamProfileLists";
+import TeamProfile from "./TeamProfile";
 // import 'bulma/css/bulma.css'
 
 function App() {
@@ -76,8 +76,10 @@ function App() {
   }
 
   const TeamProfileContainer = () => {
+    if(!user) return null;
     if(!pokemonData) return null;
-    return <TeamProfile pokemon={pokemonData} />
+
+    return <TeamProfile pokemon={pokemonData} teams={user.teams} />
   }
 
   const clearUser = () => {

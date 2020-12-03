@@ -12,19 +12,19 @@ export default function Navbar(props) {
         <Link to="/">
           <button className="">Home</button>
         </Link>
-        <div class="divider"/>
+        <div className="divider"/>
         <Link to="/profile">
           <button className="">Profile</button>
         </Link>
-        <div class="divider"/>
+        <div className="divider"/>
         <Link to="team_lists">
           <button className="">Teams</button>
         </Link>
-        <div class="divider"/>
+        <div className="divider"/>
         <Link to="/friends">
           <button className="">Friends</button>
         </Link>
-        <div class="divider"/>
+        <div className="divider"/>
         <Link to="/login">
           <button className="" onClick={handleSignOut}>Sign Out</button>
         </Link>

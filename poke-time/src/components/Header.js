@@ -21,7 +21,7 @@ function Header(props){
                     <Link to={'/signup'}>
                         <button className="">Sign Up</button>
                     </Link>
-                    <div class="divider"/>
+                    <div className="divider"/>
                     <Link to={'/login'}>
                         <button className="">Log In</button>
                     </Link>
