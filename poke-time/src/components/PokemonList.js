@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import SearchBar from './SearchBar';
-import Pokemon from './Pokemon';
+import DraggablePokemon from './DraggablePokemon';
 
 export default function PokemonList({pokemon}) {
     const [visiblePokemon, setVisiblePokemon] = useState(pokemon);
@@ -17,7 +17,7 @@ export default function PokemonList({pokemon}) {
     const renderSinglePokemon = (pokemon, index) => {
         return (
             <li key={index}>
-                <Pokemon pokemon={pokemon} />
+                <DraggablePokemon pokemon={pokemon} />
             </li>
         )
     };
@@ -25,7 +25,7 @@ export default function PokemonList({pokemon}) {
     return (
         <div className="">
             <SearchBar onChange={handleSearchUpdate} />
-            <ul className="tiles ">
+            <ul className="tiles">
                 {visiblePokemon.map(renderSinglePokemon)}
             </ul>
         </div>

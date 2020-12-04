@@ -1,6 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { Switch, Route, useHistory } from 'react-router-dom';
+
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
 import Header from './Header'
 import Home from './Home';
 import SignInForm from './SignInForm';
@@ -36,17 +39,6 @@ function App() {
     fetchPokemon()
     history.push("/profile");
 
-  }
-
-  const handleAuthClick = () => {
-    const token = localStorage.getItem("token")
-    fetch(`http://localhost:3000/user_is_authed`, {
-      headers: {
-        "Authorization": `Bearer ${token}`
-      }
-    })
-    .then(resp => resp.json())
-    .then(data => console.log(data))
   }
 
   const fetchPokemon = () => {
@@ -87,29 +79,30 @@ function App() {
   }
 
   return (
-    <div className="App">
-      {user ? (
-        <React.Fragment>
-          <Header user={user} clearUser={clearUser} />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/profile" component={ProfileContainer} />
-            <Route path="/friends" component={FriendsContainer} />
-            <Route path="/team_lists" component={TeamProfileContainer} />
-          </Switch>
-        </React.Fragment>
-      ) : (
-        <>
-          <Header />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={LoginContainer} />
-            <Route path="/signup" component={SignupContainer} />
-          </Switch>
-        </>
-      )}
-      {/* <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button> */}
-    </div>
+    <DndProvider backend={HTML5Backend}>
+      <div className="App">
+        {user ? (
+          <React.Fragment>
+            <Header user={user} clearUser={clearUser} />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/profile" component={ProfileContainer} />
+              <Route path="/friends" component={FriendsContainer} />
+              <Route path="/team_lists" component={TeamProfileContainer} />
+            </Switch>
+          </React.Fragment>
+        ) : (
+          <>
+            <Header />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/login" component={LoginContainer} />
+              <Route path="/signup" component={SignupContainer} />
+            </Switch>
+          </>
+        )}
+      </div>
+    </DndProvider>
   );
 }
 

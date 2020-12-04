@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Pokemon from './Pokemon'
 
-
-export default function DnD() {
+export default function DnD(props) {
+    
+    const [pokeProps, setPokeProps] = useState(props)
+    console.log(props)
 
     return (
         <div>
@@ -9,7 +12,7 @@ export default function DnD() {
                 <div className="dnd-group">
                 <div className="group-title">First team</div>
                     <div className="dnd-item">
-                        <p>example text</p>
+                    <span></span>
                     </div>
                 </div>
             </div>

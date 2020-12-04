@@ -1,7 +1,7 @@
 import React from 'react';
-import PokemonList from './PokemonList';
+
 import UserBioComponent from './UserBioComponent'
-import SideBar from './SideBar'
+
 
   // Testing route
 export default function Profile(props) {

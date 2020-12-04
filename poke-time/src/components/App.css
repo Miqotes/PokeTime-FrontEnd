@@ -71,16 +71,16 @@ ul{
   list-style-type: none;
 }
 
-.tiles{
-  /* display: inline-block; */
-  /* width:calc((750px / 3)); */
+.pokemonCard {
+  height: 128px;
+  width: 210px;
+}
+
+.tiles {
   display: grid;
   grid-gap: 15px;
   grid-template-columns: repeat(auto-fit, 210px);
-  overflow-y: scroll;
   max-height:300px;
-  
-  
 }
 
 .profileBox{
@@ -100,6 +100,10 @@ ul{
   left: 50%; 
   width: 25%;
 } 
+
+.scrollbar {
+  overflow-y: scroll;
+}
 
 .lowerForm{
   float: left;

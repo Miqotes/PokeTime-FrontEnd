@@ -1,14 +1,8 @@
-import React, {useState, useLayoutEffect} from "react";
+import React, {useLayoutEffect} from "react";
+import { useDrop } from "react-dnd";
 
-import Pokemon from "./Pokemon"
-
-function renderTeamSlot(pokemon, index) {
-    return (
-        <li className="">
-            <Pokemon pokemon={pokemon} />
-        </li>
-    )
-}
+import DraggablePokemon from "./DraggablePokemon"
+import { ItemTypes } from "./Constants";
 
 // Team is:
 // {
@@ -16,37 +10,81 @@ function renderTeamSlot(pokemon, index) {
 //    pokemon: [],
 //  }
 
+function TeamSlot(props) {
+
+    const {pokemon, onJoin: handleJoin, onLeave: handleLeave} = props
+
+    const [dndProps, drop] = useDrop({
+        accept: ItemTypes.POKEMON,
+        drop: handleJoin,
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver()
+        })
+    })
+    const {isOver} = dndProps
+
+    return (
+        <li ref={drop} className="pokemonCard">
+            <DraggablePokemon pokemon={pokemon} onDrop={handleLeave} />
+        </li>
+    )
+}
+
 export default function EditablePokemonTeam(props) {
-    const [draftTeam, setDraftTeam] = useState(props.team)
+    const {team, updateTeam} = props;
 
     useLayoutEffect(() => {
         let fullPokemon = []
-        if (draftTeam.pokemon.length < 6) {
+        if (team.pokemon.length < 6) {
             
             for (let i = 0; i < 6; i++) {
-                if(i < draftTeam.pokemon.length) {
-                    fullPokemon.push(draftTeam.pokemon[i])
+                if(i < team.pokemon.length) {
+                    fullPokemon.push(team.pokemon[i])
                 } else {
                     fullPokemon.push(null)
                 }
             }
-        } else if (draftTeam.pokemon.length === 6) {
+        } else if (team.pokemon.length === 6) {
             return;
         } else {
-            fullPokemon = draftTeam.pokemon.slice(0, 6)
+            fullPokemon = team.pokemon.slice(0, 6)
         }
 
-        setDraftTeam({
-            ...draftTeam,
-            pokemon: fullPokemon,
+        updateTeam({
+            ...team,
+            pokemon: fullPokemon
         })
-    }, [draftTeam])
+    }, [team])
+
+    const renderTeamSlot = (pokemon, index) => {
+
+        const handlePokemonJoin = (payload) => {
+            const {pokemon} = payload
+            let pokemonTeam = [...team.pokemon]
+            pokemonTeam[index] = pokemon
+            updateTeam({
+                ...team,
+                pokemon: pokemonTeam,
+            })
+        }
+
+        const handlePokemonLeft = () => {
+            let pokemonTeam = [...team.pokemon]
+            pokemonTeam[index] = null
+            updateTeam({
+                ...team,
+                pokemon: pokemonTeam,
+            })
+        }
+
+        return <TeamSlot key={index} pokemon={pokemon} onJoin={handlePokemonJoin} onLeave={handlePokemonLeft} />
+    }
 
     return (
         <div>
             <h2>Team Name</h2>
             <ul className="tiles">
-                {draftTeam.pokemon.map(renderTeamSlot)}
+                {team.pokemon.map(renderTeamSlot)}
             </ul>
         </div>
     )

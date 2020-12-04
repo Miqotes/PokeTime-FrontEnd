@@ -1,11 +1,11 @@
 import React from 'react';
-
+import DnD from './DnD'
 // placeholder for friends
 
 export default function Friends() {
     return (
         <div>
-            <h2>User here</h2>
+            
         </div>
     )
 }
