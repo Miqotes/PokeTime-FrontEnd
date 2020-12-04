@@ -31,6 +31,7 @@ function TeamSlot(props) {
 }
 
 export default function EditablePokemonTeam(props) {
+
     const {team, updateTeam} = props;
 
     useLayoutEffect(() => {
@@ -45,7 +46,7 @@ export default function EditablePokemonTeam(props) {
                 }
             }
         } else if (team.pokemon.length === 6) {
-            return;
+            
         } else {
             fullPokemon = team.pokemon.slice(0, 6)
         }

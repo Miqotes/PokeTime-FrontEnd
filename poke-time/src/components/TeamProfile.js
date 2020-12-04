@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import PokemonList from './PokemonList';
-import TeamListContainer from './TeamListContainer'
+import TeamListContainer from './TeamListContainer';
+import FavoritePokemon from './FavoritePokemon';
+import { isFlowBaseAnnotation } from '@babel/types';
+
 export default function TeamProfile(props) {
     const {pokemon, teams} = props;
     
@@ -12,6 +15,9 @@ export default function TeamProfile(props) {
             </div>
             <div className="ui container blue segment scrollbar">
                 <TeamListContainer teams={teams} />
+            </div>
+            <div className="ui container red segment">
+                <FavoritePokemon />
             </div>
         </>
     )
