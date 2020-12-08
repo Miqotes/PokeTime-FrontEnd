@@ -1,6 +1,6 @@
 import React from 'react';
 import UserBioComponent from './UserBioComponent'
-// import { ProgressPlugin } from 'webpack';
+
 
 export default function SideBar(props) {
     return (
