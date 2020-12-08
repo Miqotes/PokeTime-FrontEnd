@@ -18,7 +18,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [pokemonData, setPokemonData] = useState(null)
 
-  useEffect(() => {
+  const handleLogin = () => {
     const token = localStorage.getItem("token")
     if(token){
       fetch(`http://localhost:3000/auto_login`, {
@@ -28,13 +28,15 @@ function App() {
       })
       .then(resp => resp.json())
       .then(data => {
-        handleLogin(data)
+        finishLogin(data)
         // console.log(data)
       })
     }
-  }, [])
+  }
 
-  const handleLogin = (user) => {
+  useEffect(handleLogin, [])
+
+  const finishLogin = (user) => {
     setUser(user)
     fetchPokemon()
     history.push("/profile");
@@ -50,6 +52,38 @@ function App() {
     })
     .then(resp => resp.json())
     .then(data => setPokemonData(data))
+  }
+
+  const patchUser = (user) => {
+    const token = localStorage.getItem("token")
+    const userPatch = {
+      teams: user.teams,
+      favorites: user.favorites,
+    }
+    setUser(user)
+
+    fetch(`http://localhost:3000/users/${user.id}`, {
+      method: 'PATCH', 
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(userPatch),
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      //setUser(data)
+    })
+  }
+  
+
+  const updateFavorite = (favorites) => {
+    patchUser({...user, favorites})
+  }
+
+  const updateTeams = (teams) => {
+    patchUser({...user, teams})
   }
 
   const LoginContainer = () => {
@@ -70,8 +104,16 @@ function App() {
   const TeamProfileContainer = () => {
     if(!user) return null;
     if(!pokemonData) return null;
-
-    return <TeamProfile pokemon={pokemonData} teams={user.teams} />
+    console.log(user)
+    return (
+      <TeamProfile
+        pokemon={pokemonData}
+        teams={user.teams}
+        updateTeams={updateTeams}
+        favorites={user.favorites}
+        updateFavorite={updateFavorite}
+      />
+    )
   }
 
   const clearUser = () => {

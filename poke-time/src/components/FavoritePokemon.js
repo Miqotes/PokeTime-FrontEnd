@@ -24,64 +24,53 @@ function FavoriteSlot(props) {
     )
 }
 
-export default function EditableFavoritePokemon(props) {
+export default function FavoritePokemon(props) {
 
-    const { favorite, updateFavorite } = props;
+    const { favorites, updateFavorite } = props;
 
     useLayoutEffect(() => {
         let fullFavoritePokemon = []
-        if (favorite.pokemon.length < 50) {
+        if (favorites.length < 50) {
 
             for (let i = 0; i < 50; i++) {
-                if (i < favorite.pokemon.length) {
-                    fullFavoritePokemon.push(favorite.pokemon[i])
+                if (i < favorites.length) {
+                    fullFavoritePokemon.push(favorites[i])
                 } else {
                     fullFavoritePokemon.push(null)
                 }
             }
-        } else if (favorite.pokemon.length === 50) {
-
+        } else if (favorites.length === 50) {
+            return;
         } else {
-                fullFavoritePokemon = favorite.pokemon.slice(0, 50)
+                fullFavoritePokemon = favorites.slice(0, 50)
         }
 
-        updateFavorite({
-            ...favorite,
-            pokemon: fullFavoritePokemon
-        })
-    }, [favorite])
+        updateFavorite(fullFavoritePokemon)
+    }, [favorites])
 
     const renderFavoritePokemon = (pokemon, index) => {
 
         const handleFavoriteJoin = (payload) => {
             const {pokemon} = payload
-            let favoritePokemon = [...favorite.pokemon]
+            let favoritePokemon = [...favorites]
             favoritePokemon[index] = pokemon
-            updateFavorite({
-                ...favorite,
-                pokemon: favoritePokemon,
-            })
+            updateFavorite(favoritePokemon)
         }
 
         const handleFavoriteLeft = () => {
-            let favoritePokemon = [...favorite.pokemon]
+            let favoritePokemon = [...favorites]
             favoritePokemon[index] = null
-            updateFavorite({
-                ...favorite,
-                pokemon: favoritePokemon,
-            })
+            updateFavorite(favoritePokemon)
         }
 
         return <FavoriteSlot key={index} pokemon={pokemon} onJoin={handleFavoriteJoin} onLeave={handleFavoriteLeft} />
     }
 
-
-
     return (
         <div>
             <h2>Favorites</h2>
             <ul className="tiles">
-                {favorite.pokemon.map(renderFavoritePokemon)}
+                {favorites.map(renderFavoritePokemon)}
             </ul>
         </div>
     )

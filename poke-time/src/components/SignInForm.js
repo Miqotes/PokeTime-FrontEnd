@@ -28,7 +28,7 @@ function SignInForm(props) {
         .then(resp => resp.json())
         .then(data => {
             localStorage.setItem("token", data.jwt)
-            props.handleLogin(data.user)
+            props.handleLogin()
         })
         setUsername("")
         setPassword("")

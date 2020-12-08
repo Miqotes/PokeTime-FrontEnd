@@ -1,8 +1,9 @@
-import React, {useLayoutEffect} from "react";
+import React, { useLayoutEffect } from "react";
 import { useDrop } from "react-dnd";
 
 import DraggablePokemon from "./DraggablePokemon"
 import { ItemTypes } from "./Constants";
+
 
 // Team is:
 // {
@@ -12,7 +13,7 @@ import { ItemTypes } from "./Constants";
 
 function TeamSlot(props) {
 
-    const {pokemon, onJoin: handleJoin, onLeave: handleLeave} = props
+    const { pokemon, onJoin: handleJoin, onLeave: handleLeave } = props
 
     const [dndProps, drop] = useDrop({
         accept: ItemTypes.POKEMON,
@@ -21,7 +22,7 @@ function TeamSlot(props) {
             isOver: !!monitor.isOver()
         })
     })
-    const {isOver} = dndProps
+    const { isOver } = dndProps
 
     return (
         <li ref={drop} className="pokemonCard">
@@ -32,21 +33,21 @@ function TeamSlot(props) {
 
 export default function EditablePokemonTeam(props) {
 
-    const {team, updateTeam} = props;
+    const { team, updateTeam } = props;
 
     useLayoutEffect(() => {
         let fullPokemon = []
         if (team.pokemon.length < 6) {
-            
+
             for (let i = 0; i < 6; i++) {
-                if(i < team.pokemon.length) {
+                if (i < team.pokemon.length) {
                     fullPokemon.push(team.pokemon[i])
                 } else {
                     fullPokemon.push(null)
                 }
             }
         } else if (team.pokemon.length === 6) {
-            
+            return;
         } else {
             fullPokemon = team.pokemon.slice(0, 6)
         }
@@ -60,7 +61,7 @@ export default function EditablePokemonTeam(props) {
     const renderTeamSlot = (pokemon, index) => {
 
         const handlePokemonJoin = (payload) => {
-            const {pokemon} = payload
+            const { pokemon } = payload
             let pokemonTeam = [...team.pokemon]
             pokemonTeam[index] = pokemon
             updateTeam({
@@ -83,10 +84,17 @@ export default function EditablePokemonTeam(props) {
 
     return (
         <div>
-            <h2>Team Name</h2>
+            <form>
+                <label>
+                    Name: <input type="text" name="name" className="">{team.name}</input>
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
+            <div className="divider"></div>
             <ul className="tiles">
                 {team.pokemon.map(renderTeamSlot)}
             </ul>
+            <div className="divider"></div>
         </div>
     )
 }

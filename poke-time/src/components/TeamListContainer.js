@@ -1,34 +1,55 @@
-import React, {useState} from 'react';
+import React from 'react';
 import EditablePokemonTeam from "./EditablePokemonTeam";
 
 
 function createEmptyTeam() {
     return {
         id: -1,
-        pokemon: [],
+        pokemon: [null, null, null, null, null, null],
         teamName: "New Team Name",
     }
 }
 
+
+
 export default function TeamListContainer(props) {
-    const [draftTeams, setDraftTeams] = useState(props.teams)
+    const {updateTeams, teams, id} = props
 
-    window.addEventListener('beforeunload', (e) => {
-        console.log("WINDOW UNLOADING FOR REFRESH SAVE TEAMS IN HERE")
-
-        return null
-    });
 
     const handleAddTeam = () => {
         const newTeam = createEmptyTeam();
-        setDraftTeams([...draftTeams, newTeam])
+        updateTeams([...teams, newTeam])
+    }
+
+    const deleteTeam = (team) => {
+        const token = localStorage.getItem("token")
+    
+        fetch(`http://localhost:3000/teams/${team.id}`, {
+            method: 'DELETE', 
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+          //setUser(data)
+        })
+        }
+
+    const handleRemoveLastTeam = () => {
+        let remainingTeams = [...teams]
+        const lastTeam = remainingTeams.pop()
+        deleteTeam(lastTeam)
+        updateTeams(remainingTeams)
     }
 
     const renderPokemonTeam = (team, index) => {
         const updateTeam = (updatedTeam) => {
-            let newDraftTeams = [...draftTeams];
-            newDraftTeams[index] = updatedTeam;
-            setDraftTeams(newDraftTeams)
+            let newTeams = [...teams];
+            newTeams[index] = updatedTeam;
+            updateTeams(newTeams)
         }
 
         return (
@@ -41,9 +62,10 @@ export default function TeamListContainer(props) {
     return(
         <>
             <ul>
-                {draftTeams.map(renderPokemonTeam)}
+                {teams.map(renderPokemonTeam)}
             </ul>
             <button onClick={handleAddTeam}>+</button>
+            <button onClick={handleRemoveLastTeam}>-</button>
         </>
     )
 }
